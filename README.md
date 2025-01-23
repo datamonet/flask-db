@@ -33,6 +33,39 @@ The application uses SQLite database (students.db) which will be automatically c
 - id (Primary Key)
 - first_name
 - last_name
+- email (unique, nullable)
 
 ## Sample Data
 The seed script (`seed_db.py`) will populate the database with 10 sample students. You can run this script once to initialize the database with sample data. The script includes a check to prevent duplicate seeding.
+
+## Database Migrations
+
+This project uses Alembic for database migrations. Here's how to work with migrations:
+
+1. Initialize migrations (already done):
+```bash
+alembic init migrations
+```
+
+2. Create a new migration:
+```bash
+alembic revision --autogenerate -m "Description of the change"
+```
+
+3. Apply migrations:
+```bash
+alembic upgrade head
+```
+
+4. Rollback migrations:
+```bash
+alembic downgrade -1  # Rollback one step
+alembic downgrade base  # Rollback all migrations
+```
+
+5. View migration history:
+```bash
+alembic history
+```
+
+Note: When making changes to the database schema, always use migrations rather than modifying the models directly. This ensures that your database changes are tracked and can be rolled back if needed.
